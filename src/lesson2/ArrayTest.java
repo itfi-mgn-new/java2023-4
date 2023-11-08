@@ -29,6 +29,12 @@ public class ArrayTest {
 		Object	obj = x;
 		
 		
+		int[][]	a = new int[][] {new int[] {2,3}, null, new int[] {4}};
+		
+		a[0][0] = 200;
+		
+		a[1] = new int[] {333,444};
+		
 	}
 
 }
