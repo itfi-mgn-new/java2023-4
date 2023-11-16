@@ -18,10 +18,15 @@ public class Matrix {
 		
 		System.err.println("Add="+mat1.add(mat2));
 		System.err.println("Multiply="+mat1.mul(mat2));
+		//m1 = new Matrix()..., m2, m3, m4, m5;
+		// total = m1.mul(m2).add(m3.mul(m4)).add(m5);
+		//m1 * m2 + m3 * 4 + m5
 	}
 
 	public Matrix add(final Matrix right) {
 		// TODO:
+		setContent(MatrixLibrary.add(getContent(), right.getContent()));
+		return this;
 	}
 
 	public Matrix mul(final Matrix right) {
