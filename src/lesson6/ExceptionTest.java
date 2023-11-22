@@ -14,6 +14,10 @@ public class ExceptionTest {
 	}
 	
 	public static void nestedError(int x) throws Throwable {
+		// NullPointerException
+		// IllegalArgumentException
+		// IllegalStateException
+		// UnsupportedOperationException
 		try {
 			error(x);
 		} catch (Exception e) {
