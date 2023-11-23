@@ -30,6 +30,8 @@ public class Matrix {
 	}
 
 	public Matrix add(final Matrix right) {
+		// 1. null
+		// 2. this.кол_строк == right.кол_строк && this.кол_столбцов == right.кол_столбцов
 		// TODO:
 		/*final Matrix newMatrix =*/ return new Matrix(MatrixLibrary.add(getContent(), right.getContent()));
 		
@@ -38,7 +40,8 @@ public class Matrix {
 	}
 
 	public Matrix mul(final Matrix right) {
-		// TODO:
+		// 1. null
+		// 2. this.кол_строк == right.кол_стоблцов
 	}
 	
 	public int[][] getContent() {
