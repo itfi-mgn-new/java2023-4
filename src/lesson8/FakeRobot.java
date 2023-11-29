@@ -160,7 +160,7 @@ public class FakeRobot implements Robot {
 
 	@Override
 	public Robot drop() {
-		if (takeCargo) {
+		if (!takeCargo) {
 			throw new IllegalStateException("Robot didn't take cargo to drop");
 		}
 		else if (isWall()) {
