@@ -135,7 +135,7 @@ public class FakeRobot implements Robot {
 
 	@Override
 	public boolean isCargo() {
-		if (cargoPresents) {
+		if (cargoPresents & !takeCargo) {
 			return getBeforeX() == cargoX && getBeforeY() == cargoY;
 		}
 		else {

@@ -1,10 +1,16 @@
 package lesson7;
 
+import lesson8.FakeRobot;
+
 public class Exercise {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		final Exercise	ex = new Exercise();
+		
+		ex.toLeftBottom(new FakeRobot(7,9));
+//		System.err.println("Square="+ex.calcSquare(new FakeRobot(7,9)));
+//		ex.mineGold(new FakeRobot(7,9,0,0,true));
 	}
 
 	void go2Wall(final Robot r) {
@@ -30,9 +36,9 @@ public class Exercise {
 //		}
 	}
 
-	int calcSquare(final Robot r) {		
-	}
-	
-	void mineGold(final Robot r) {
-	}
+//	int calcSquare(final Robot r) {		
+//	}
+//	
+//	void mineGold(final Robot r) {
+//	}
 }
