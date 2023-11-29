@@ -3,8 +3,8 @@ package lesson8;
 import lesson7.Robot;
 
 public class FakeRobot implements Robot {
+	private final int		roomLength;
 	private final int		roomWidth;
-	private final int		roomHeight;
 	private final boolean	cargoPresents;
 	private int				robotX;
 	private int				robotY;
@@ -14,38 +14,38 @@ public class FakeRobot implements Robot {
 	private boolean			takeCargo = false;
 	private Object			cargo = null;
 	
-	public FakeRobot(final int roomWidth, final int roomHeight) {
-		this(roomWidth, roomHeight, getRandomValue(0, roomWidth), getRandomValue(0, roomHeight));
+	public FakeRobot(final int roomLength, final int roomWidth) {
+		this(roomLength, roomWidth, getRandomValue(0, roomLength), getRandomValue(0, roomWidth));
 	}
 
-	public FakeRobot(final int roomWidth, final int roomHeight, final int robotX, final int robotY) {
-		this(roomWidth, roomHeight, robotX, robotY, false);
+	public FakeRobot(final int roomLength, final int roomWidth, final int robotX, final int robotY) {
+		this(roomLength, roomWidth, robotX, robotY, false);
 	}
 
-	public FakeRobot(final int roomWidth, final int roomHeight, final int robotX, final int robotY, final boolean placeCargo) {
-		if (roomWidth <= 1) {
+	public FakeRobot(final int roomLength, final int roomWidth, final int robotX, final int robotY, final boolean placeCargo) {
+		if (roomLength <= 1) {
+			throw new IllegalArgumentException("Room length ["+roomLength+"] must be greater than 1");
+		}
+		else if (roomWidth <= 1) {
 			throw new IllegalArgumentException("Room width ["+roomWidth+"] must be greater than 1");
 		}
-		else if (roomHeight <= 1) {
-			throw new IllegalArgumentException("Room height ["+roomHeight+"] must be greater than 1");
+		else if (robotX < 0 || robotX >= roomLength) {
+			throw new IllegalArgumentException("Robot X coordinate ["+robotX+"] out of range 0.."+(roomLength-1));
 		}
-		else if (robotX < 0 || robotX >= roomWidth) {
-			throw new IllegalArgumentException("Robot X coordinate ["+robotX+"] out of range 0.."+(roomWidth-1));
-		}
-		else if (robotY < 0 || robotY >= roomHeight) {
-			throw new IllegalArgumentException("Robot Y coordinate ["+robotY+"] out of range 0.."+(roomHeight-1));
+		else if (robotY < 0 || robotY >= roomWidth) {
+			throw new IllegalArgumentException("Robot Y coordinate ["+robotY+"] out of range 0.."+(roomWidth-1));
 		}
 		else {
+			this.roomLength = roomLength;
 			this.roomWidth = roomWidth;
-			this.roomHeight = roomHeight;
 			this.robotX = robotX;
 			this.robotY = robotY;
 			this.robotAngle = (getRandomValue(0, 360) / 90) * 90;
 			this.cargoPresents = placeCargo;
 			if (placeCargo) {
 				for(;;) {
-					final int	x = getRandomValue(0, roomWidth);
-					final int	y = getRandomValue(0, roomHeight);
+					final int	x = getRandomValue(0, roomLength);
+					final int	y = getRandomValue(0, roomWidth);
 					
 					if (robotX != x && robotY != y) {
 						this.cargoX = x;
@@ -83,16 +83,16 @@ public class FakeRobot implements Robot {
 		else {
 			switch (getRotationAngle()) {
 				case 0		:
-					robotY++;
-					break;
-				case 90 	:
 					robotX++;
 					break;
+				case 90 	:
+					robotY++;
+					break;
 				case 180 	:
-					robotY--;
+					robotX--;
 					break;
 				case 270 	:
-					robotX--;
+					robotY--;
 					break;
 				default :
 					throw new UnsupportedOperationException("Robot rotation angle ["+getRotationAngle()+"] is not supported yet");
@@ -125,7 +125,7 @@ public class FakeRobot implements Robot {
 
 	@Override
 	public boolean isWall() {
-		if (getBeforeX() < 0 || getBeforeX() >= roomWidth || getBeforeY() < 0 || getBeforeY() >= roomHeight) {
+		if (getBeforeX() < 0 || getBeforeX() >= roomLength || getBeforeY() < 0 || getBeforeY() >= roomWidth) {
 			return true;
 		}
 		else {
