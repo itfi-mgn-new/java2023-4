@@ -9,6 +9,8 @@ public class Exercise {
 		final Exercise	ex = new Exercise();
 		
 		ex.toLeftBottom(new FakeRobot(7,9));
+		
+		
 //		System.err.println("Square="+ex.calcSquare(new FakeRobot(7,9)));
 //		ex.mineGold(new FakeRobot(7,9,0,0,true));
 	}

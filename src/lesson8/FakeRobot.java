@@ -176,7 +176,7 @@ public class FakeRobot implements Robot {
 	}
 
 	private int getBeforeX() {
-		switch (robotAngle) {
+		switch (getRotationAngle()) {
 			case 0		: return getX() + 1;
 			case 90 	: return getX();
 			case 180 	: return getX() - 1;
