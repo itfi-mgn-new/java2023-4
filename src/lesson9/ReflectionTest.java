@@ -65,6 +65,9 @@ public class ReflectionTest {
 		System.err.println("Superclass: "+cl.getSuperclass());
 		Field	fld = cl.getSuperclass().getDeclaredField("x");
 		System.err.println("Field type: "+fld.getType());
+		
+		// fld.getType() == int.class
+		
 		fld.setAccessible(true);
 		System.err.println("Field value: "+fld.get(obj));
 		fld.set(obj, 200);
