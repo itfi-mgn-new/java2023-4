@@ -1,5 +1,6 @@
 package lesson8;
 
+import lesson7.Direction;
 import lesson7.Robot;
 
 public class FakeRobot implements Robot {
@@ -8,7 +9,7 @@ public class FakeRobot implements Robot {
 	private final boolean	cargoPresents;
 	private int				robotX;
 	private int				robotY;
-	private int				robotAngle;
+	private Direction		robotAngle;
 	private int				cargoX = Integer.MIN_VALUE;
 	private int				cargoY = Integer.MIN_VALUE;
 	private boolean			takeCargo = false;
@@ -40,7 +41,7 @@ public class FakeRobot implements Robot {
 			this.roomWidth = roomWidth;
 			this.robotX = robotX;
 			this.robotY = robotY;
-			this.robotAngle = (getRandomValue(0, 360) / 90) * 90;
+			this.robotAngle = Direction.values()[getRandomValue(0, 4)];
 			this.cargoPresents = placeCargo;
 			if (placeCargo) {
 				for(;;) {
@@ -68,7 +69,7 @@ public class FakeRobot implements Robot {
 	}
 
 	@Override
-	public int getRotationAngle() {
+	public Direction getRotationAngle() {
 		return robotAngle;
 	}
 
@@ -82,16 +83,16 @@ public class FakeRobot implements Robot {
 		}
 		else {
 			switch (getRotationAngle()) {
-				case 0		:
+				case EAST	:
 					robotX++;
 					break;
-				case 90 	:
+				case NORTH 	:
 					robotY++;
 					break;
-				case 180 	:
+				case WEST 	:
 					robotX--;
 					break;
-				case 270 	:
+				case SOUTH 	:
 					robotY--;
 					break;
 				default :
@@ -103,22 +104,42 @@ public class FakeRobot implements Robot {
 
 	@Override
 	public Robot left() {
-		if (robotAngle == 270) {
-			robotAngle = 0;
-		}
-		else {
-			robotAngle += 90;
+		switch (getRotationAngle()) {
+			case EAST:
+				robotAngle = Direction.NORTH;
+				break;
+			case NORTH:
+				robotAngle = Direction.WEST;
+				break;
+			case SOUTH:
+				robotAngle = Direction.EAST;
+				break;
+			case WEST:
+				robotAngle = Direction.SOUTH;
+				break;
+			default:
+				throw new UnsupportedOperationException("Direction ["+getRotationAngle()+"] is not supported yet");
 		}
 		return this;
 	}
 
 	@Override
 	public Robot right() {
-		if (robotAngle == 0) {
-			robotAngle = 270;
-		}
-		else {
-			robotAngle -= 90;
+		switch (getRotationAngle()) {
+			case EAST:
+				robotAngle = Direction.SOUTH;
+				break;
+			case NORTH:
+				robotAngle = Direction.EAST;
+				break;
+			case SOUTH:
+				robotAngle = Direction.WEST;
+				break;
+			case WEST:
+				robotAngle = Direction.NORTH;
+				break;
+			default:
+				throw new UnsupportedOperationException("Direction ["+getRotationAngle()+"] is not supported yet");
 		}
 		return this;
 	}
@@ -177,10 +198,10 @@ public class FakeRobot implements Robot {
 
 	private int getBeforeX() {
 		switch (getRotationAngle()) {
-			case 0		: return getX() + 1;
-			case 90 	: return getX();
-			case 180 	: return getX() - 1;
-			case 270 	: return getX();
+			case EAST	: return getX() + 1;
+			case NORTH 	: return getX();
+			case WEST 	: return getX() - 1;
+			case SOUTH 	: return getX();
 			default :
 				throw new UnsupportedOperationException("Robot rotation angle ["+robotAngle+"] is not supported yet");
 		}
@@ -188,10 +209,10 @@ public class FakeRobot implements Robot {
 
 	private int getBeforeY() {
 		switch (robotAngle) {
-			case 0		: return getY();
-			case 90 	: return getY() + 1;
-			case 180 	: return getY();
-			case 270 	: return getY() - 1;
+			case EAST	: return getY();
+			case NORTH 	: return getY() + 1;
+			case WEST 	: return getY();
+			case SOUTH 	: return getY() - 1;
 			default :
 				throw new UnsupportedOperationException("Robot rotation angle ["+robotAngle+"] is not supported yet");
 		}
