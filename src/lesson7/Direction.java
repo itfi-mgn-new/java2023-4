@@ -1,8 +1,8 @@
 package lesson7;
 
 public enum Direction {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST
+	NORTH,	// 90
+	EAST,	// 0
+	SOUTH,	// 270
+	WEST	// 180
 }
