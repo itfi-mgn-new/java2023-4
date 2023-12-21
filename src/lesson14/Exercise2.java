@@ -10,6 +10,23 @@ public class Exercise2 {
 	
 	static int calc(final String source) {
 		// TODO: split string and calculate sum
+		int	sum = 0;
+		for(String x : source.split("\\+")) {
+			int	sum1 = 0;
+			boolean theSameFirst = true;
+			for(String x1 : x.split("\\-")) {
+				if (theSameFirst) {
+					sum1 += Integer.valueOf(x1);
+					theSameFirst = false;
+				}
+				else {
+					sum1 -= Integer.valueOf(x1);
+				}
+			}
+			
+			sum += sum1;
+		}
+		return sum;
 	}
 
 }
