@@ -43,7 +43,7 @@ public class Exercise2 {
 			StringBuilder	sb = new StringBuilder();
 			sb.append(HUNDREDS[handreds]);
 			
-			if (tens == 10) {
+			if (tens == 1) {
 				sb.append(TEENS[value]);
 			}
 			else {
