@@ -10,6 +10,16 @@ public class Exercise3 {
 	
 	static int calc(final String source) {
 		// TODO: split string and calculate sum
-	}
+		int	sum = 0;
+		for(String x : source.split("\\+")) {
+			int	sum1 = 1;
+			for(String x1 : x.split("\\*")) {
+					sum1 *= Integer.valueOf(x1);
+			}
+			
+			sum += sum1;
+		}
+		return sum;
+}
 
 }
