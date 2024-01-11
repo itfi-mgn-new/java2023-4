@@ -15,12 +15,13 @@ import java.io.Writer;
 public class NestedTest {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		try(InputStream is = new FileInputStream("c:/temp/source.txt");
+		try(InputStream is = new FileInputStream("c:/temp/vassya.txt");
 			Reader		rdr = new InputStreamReader(is);
 			BufferedReader	brdr = new BufferedReader(rdr);
-			OutputStream os = new FileOutputStream("c:/temp/target.txt");
+//			OutputStream os = new FileOutputStream("c:/temp/target.txt");
 //			GZIPOutputStream	g = new GZIPOutputStream(os);	
-			Writer		wr = new OutputStreamWriter(os)) {
+//			Writer		wr = new OutputStreamWriter(os)
+				) {
 			
 //			char[]	b = new char[100000000];
 //			int len, displ = 0;
@@ -32,12 +33,14 @@ public class NestedTest {
 //			wr.write(b, 0, displ);
 //			wr.flush();
 			String	s;
+			int sum = 0;
 			while ((s = brdr.readLine()) != null) {
 				System.err.println("Read: "+s);
-				wr.write(s);
+				sum += Integer.valueOf(s);
+				//wr.write(s);
 			}
-			wr.flush();
-			
+			//wr.flush();
+			System.err.println("Sum="+sum);
 			} 
 		}
 
