@@ -13,24 +13,32 @@ import java.io.Reader;
 import java.io.Writer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 public class Exercise {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		final File	src = new File("c:/temp/alles.zip");
-		final File	dest = new File("c:/temp/allesnew.txt");
+		final File	dest = new File("c:/temp/allesnew.zip");
 		
 		try(final InputStream		is = new FileInputStream(src);
 			final ZipInputStream	zis = new ZipInputStream(is);
 			final OutputStream		os = new FileOutputStream(dest);
-			final Writer			wr = new OutputStreamWriter(os)) {
+			final ZipOutputStream	zos = new ZipOutputStream(os)) {
 
 			zis.getNextEntry();		
 
 			final Reader			rdr = new InputStreamReader(zis, "utf-8");
 			final BufferedReader	brdr = new BufferedReader(rdr);
 	
+			ZipEntry	ze = new ZipEntry("dslkfjklsdj");
+			
+			ze.setMethod(ZipEntry.DEFLATED);
+			zos.putNextEntry(ze);
+			
+			final Writer			wr = new OutputStreamWriter(zos);
+			
 			String	line;
 			
 			line = brdr.readLine();
