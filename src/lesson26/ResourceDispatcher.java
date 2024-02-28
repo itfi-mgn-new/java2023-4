@@ -161,12 +161,12 @@ public class ResourceDispatcher implements AutoCloseable {
 	private static void eat(final ResourceDispatcher rd, final int left, final int right) throws InterruptedException {
 		rd.allocate(left, right);
 		System.err.println("Thread: "+Thread.currentThread().getName()+" eating");
-		Thread.sleep(1000);
+//		Thread.sleep(1000);
 		rd.free(left, right);
 	}
 
 	private static void thinking() throws InterruptedException {
 		System.err.println("Thread: "+Thread.currentThread().getName()+" thinking");
-		Thread.sleep(5000);
+//		Thread.sleep(5000);
 	}
 }
