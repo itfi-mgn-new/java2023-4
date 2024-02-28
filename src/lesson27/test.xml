@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<people>
+	<human age="21">
+		<family>Ivanov</family>
+		<name>Ivan</name>
+		<patroname>Ivanovich</patroname>
+	</human>
+	<human age="25">
+		<family>Petrov</family>
+		<name>Petr</name>
+		<patroname>Petrovich</patroname>
+	</human>
+	<human age="30">
+		<family>Sidoroff</family>
+		<name>Sidor</name>
+		<patroname>Sidorovich</patroname>
+	</human>
+</people>
