@@ -21,7 +21,10 @@ public class SaxTest {
 
 	public static class MyHandler extends DefaultHandler {
 	    private StringBuilder value = new StringBuilder();
-
+	    int	count = 0;
+	    int sum = 0;
+	    
+	    
 	    @Override
 	    public void characters(char[] ch, int start, int length) throws SAXException {
 	    	value.append(ch, start, length);
@@ -32,7 +35,10 @@ public class SaxTest {
 	        switch (qName) {
 	            case "human":
 	            	System.err.println("Human: age="+attr.getValue("age"));
-	                break;
+	                count++;
+	                sum += Integer.valueOf(attr.getValue("age"));
+	                System.err.println("Middle: "+(1.0 * sum / count));
+	            	break;
 	            case "family":
 	            	value.setLength(0);
 	                break;
