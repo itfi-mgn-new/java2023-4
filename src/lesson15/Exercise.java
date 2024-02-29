@@ -3,6 +3,7 @@ package lesson15;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,20 +27,32 @@ public class Exercise {
 			final Writer			wr = new OutputStreamWriter(os)) {
 			
 			String	line;
+			int	lineNo = 0;
 			
 			line = brdr.readLine();
 			wr.write(line+System.lineSeparator());
 			
 			while ((line = brdr.readLine()) != null) {
+				lineNo++;
 				String[]	parts = line.split(",");
 				
-				parts[2] = Integer.toString(Integer.valueOf(parts[2].trim()) * 2);
+				if (parts.length != 3) {
+					throw new IOException("File ["+src+"], line ["+lineNo+"]: illegal record format, must be <family>, <name>, <salary>");
+				}
+				
+				try {
+					parts[2] = Integer.toString(Integer.valueOf(parts[2].trim()) * 2);
+				} catch (NumberFormatException exc) {
+					throw new IOException("File ["+src+"], line ["+lineNo+"]: salary ["+parts[2]+"] is not a number");
+				}
 				
 				wr.write(parts[0]+','+parts[1]+','+parts[2]+System.lineSeparator());
 			}
 			wr.flush();
+		} catch (FileNotFoundException e) {
+			System.err.println("File ["+src+"] not found");
 		} catch (IOException e) {
-			System.err.println("Vse propalo, gips snimayut, klient uezzhaet!!!");
+			System.err.println("File ["+src+"]: I/O error during parse ("+e.getLocalizedMessage()+")");
 		}
 	}
 
