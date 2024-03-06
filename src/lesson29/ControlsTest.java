@@ -103,11 +103,7 @@ public class ControlsTest extends JFrame {
 			progress.setString("value="+slider.getValue());		
 		});
 		
-		
-		
 		getContentPane().add(new JLabel("THE END"));
-		
-		
 		
 		setSize(1024, 768);
 		setLocationRelativeTo(null);
