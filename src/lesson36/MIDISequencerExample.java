@@ -23,6 +23,7 @@ public class MIDISequencerExample {
 		    insert(track, NOTES[index], 24*index);
 	    }
 
+	    
 	    try(final Sequencer sequencer = MidiSystem.getSequencer()) {
 	    	sequencer.setSequence(sequence);
 	    	sequencer.open();

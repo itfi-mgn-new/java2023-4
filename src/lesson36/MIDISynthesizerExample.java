@@ -21,7 +21,7 @@ public class MIDISynthesizerExample {
 			final MidiChannel[]	midiChannels = synthesizer.getChannels();
 			final Instrument[] instruments = synthesizer.getAvailableInstruments();
 			
-			midiChannels[0].programChange(10);
+			midiChannels[0].programChange(35);
 			
 			final Receiver 		receiver = synthesizer.getReceiver();
 			final ShortMessage 	noteOn = new ShortMessage();
@@ -29,7 +29,7 @@ public class MIDISynthesizerExample {
 			noteOn.setMessage(ShortMessage.NOTE_ON, 0, 60, 93);
 		    receiver.send(noteOn, -1);
 			
-		    Thread.sleep(1000);
+		    Thread.sleep(5000);
 
 			final ShortMessage 	noteOff = new ShortMessage();
 		    
