@@ -107,6 +107,7 @@ public class Arcan extends JComponent {
 				score.setBounds(getWidth()-50, 20, 40, 30);
 			}
 		});
+		addMouseWheelListener((e)->processWheel(-e.getWheelRotation()));
 		
 		message.setForeground(Color.MAGENTA);
 		
@@ -121,6 +122,10 @@ public class Arcan extends JComponent {
 		automat(Terminal.PREPARE);
 	}
 	
+	private void processWheel(final int scrollAmount) {
+		barrierY += scrollAmount * BARRIER_SPEED;
+	}
+
 	private void automat(final Terminal terminal) {
 		switch (state) {
 			case INITIAL	:

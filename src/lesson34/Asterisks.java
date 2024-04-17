@@ -21,6 +21,7 @@ public class Asterisks extends JComponent {
 	private static final long  serialVersionUID = 4066983457124156696L; // <1> 
 	private static final String		HELLO_WORLD = "Hello, world!";
 	private static final double		ASTERISK_CYRCLE_RADIUS = 0.4;
+	private static final double		HEXAGON_RADIUS = 0.2;
 	private static final double		ASTERISK_SIZE = 0.05;
 	private static final double		LETTER_SIZE = 0.075;
 	private static final double		WINDOW_SIZE = 1;
@@ -57,6 +58,7 @@ public class Asterisks extends JComponent {
 			180 + index * 180 / stringSize, LETTER_SIZE
 			, HELLO_WORLD.charAt(index));
 		}
+		paintHexagon(g2d, HEXAGON_RADIUS);
 		g2d.setTransform(oldAt);
 	}
 
@@ -137,6 +139,29 @@ public class Asterisks extends JComponent {
 		g2d.setTransform(oldAt);
 	}
 
+	private void paintHexagon(final Graphics2D g2d, final double radius) {
+		final GeneralPath		hexagon = new GeneralPath();
+		final Color				oldColor = g2d.getColor();
+		final Stroke			oldStroke = g2d.getStroke();
+		final double			angle = 2 * Math.PI / 6;
+		
+		hexagon.moveTo(radius, 0);
+		for (int index = 1; index < 6; index++) {
+			hexagon.lineTo(radius * Math.cos(index * angle), radius * Math.sin(index * angle));
+		}
+		hexagon.closePath();
+		
+		g2d.setColor(Color.BLACK);
+		g2d.setStroke(new BasicStroke(LINE_WIDTH));
+		g2d.draw(hexagon);
+		g2d.setColor(Color.GREEN);
+		g2d.fill(hexagon);
+		
+		g2d.setColor(oldColor);
+		g2d.setStroke(oldStroke);
+	}
+
+	
 	public static void main(String[] args) {
 		final JFrame	frame = new JFrame("Test ");
 		
